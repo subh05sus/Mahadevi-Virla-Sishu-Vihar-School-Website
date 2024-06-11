@@ -15,14 +15,16 @@ function NoticeHome() {
   const fetchNotices = async () => {
     try {
       const data = await apiClient.getAllNotices();
-      setNotices(data.slice(0, 3));
+      const today = new Date();
+      const upcomingNotices = data.filter((notice: any) => new Date(notice.date) >= today).reverse().slice(0, 3);
+      setNotices(upcomingNotices);
     } catch (error) {
       console.error("Failed to fetch notices:", error);
     }
   };
 
-  if (!notices) {
-    return <></>;
+  if (!notices.length) {
+    return <p>No upcoming notices.</p>;
   }
 
   const handleButtonClick = (notice: any) => {
@@ -38,14 +40,14 @@ function NoticeHome() {
             {notices.map((notice, index) => (
               <button
                 key={index}
-                className="flex items-center gap-4 p-4 border rounded-lg w-full  lg:w-96 bg-gray-200"
+                className="flex items-center gap-4 p-4 border rounded-lg w-full lg:w-96 bg-gray-200"
                 onClick={() => handleButtonClick(notice)}
               >
                 <div className="grid justify-between mb-2">
                   <span className="font-bold text-2xl">{new Date(notice.date).getDate()}</span>
-                    <span className="block font-semibold text-xl">{new Date(notice.date).toLocaleString('default', { month: 'short' }).toUpperCase()}</span>
+                  <span className="block font-semibold text-xl">{new Date(notice.date).toLocaleString('default', { month: 'short' }).toUpperCase()}</span>
                 </div>
-                <div className=" w-0.5 bg-slate-600 h-20"/>
+                <div className="w-0.5 bg-slate-600 h-20" />
                 <span className="font-semibold text-xl">{notice.title}</span>
               </button>
             ))}
