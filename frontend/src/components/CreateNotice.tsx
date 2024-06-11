@@ -2,6 +2,7 @@
 import { useState } from "react";
 import * as apiClient from "../api-client";
 import { useNavigate } from "react-router-dom";
+import AdminNotice from "./AdminNotice";
 
 const CreateNotice = () => {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ const CreateNotice = () => {
           Create Notice
         </button>
       </form>
+      <AdminNotice/>
     </div>
   );
 };

@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<Layout  page="HomePage"><Homepage /></Layout>} />
         {/* <Route path="/" element={<HomePage/>}/> */}
         {!isLoggedIn &&
-          <Route path="/admin-login" element={<Layout  page=''><SignIn /></Layout>} />
+          <Route path="/admin" element={<Layout  page=''><SignIn /></Layout>} />
         }
 
         <Route path="/blogs" element={<Layout  page=''><BlogsPage /></Layout>} />

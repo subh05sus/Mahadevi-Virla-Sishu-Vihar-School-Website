@@ -34,11 +34,11 @@ function NoticeHome() {
       <div className="overflow-x-auto max-w-screen-xl mx-auto">
         <div className="space-y-3">
           <h1 className="font-bold text-3xl sticky top-0 text-center">Noticeboard</h1>
-          <div className="flex flex-nowrap gap-3 overflow-x-scroll pb-3">
+          <div className="flex flex-nowrap gap-3 overflow-x-scroll portrait:flex-col pb-3">
             {notices.map((notice, index) => (
               <button
                 key={index}
-                className="flex items-center gap-4 p-4 border rounded-lg w-full h-fit lg:w-96 bg-gray-200"
+                className="flex items-center gap-4 p-4 border rounded-lg w-full  lg:w-96 bg-gray-200"
                 onClick={() => handleButtonClick(notice)}
               >
                 <div className="grid justify-between mb-2">
