@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="text-4xl text-white font-semibold tracking-tight text-center mb-6">
         <Link to="/"><img src="mbsv.png" alt="" /></Link>
       </div>
-      <div className="container mx-auto flex   items-center flex-row  justify-between">
+      <div className="container mx-auto flex portrait:flex-col  landscape:items-center landscape:flex-row  justify-between">
         {/* Contact information */}
         <div className="text-white font-semibold tracking-tight landscape:mt-2  text-left">
           <div className="flex flex-col   items-start">
@@ -35,8 +35,8 @@ const Footer = () => {
           </div>
         </div>
         {/* Additional info */}
-        <div className="text-white font-semibold tracking-tight mt-2  text-right  mt-0">
-          <div className="flex flex-col   items-end justify-center">
+        <div className="text-white font-semibold tracking-tight mt-2  landscape:text-right  portrait:text-left ">
+          <div className="flex flex-col   landscape:items-end justify-center">
               <span className="flex text-center text-2xl items-center gap-3 landscape:mb-2">
                 <span>Our Socials </span>
                 <span className="flex gap-2">
@@ -73,7 +73,7 @@ const Footer = () => {
           © Yogvanholidays 2021. All Rights Reserved. Designed by BatLoop
         </p>
       </div> */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 px-2">
       {/* Junior & Middle Section */}
       <div className="rounded-lg overflow-hidden">
         <div className="bg-gray-100 p-4">
