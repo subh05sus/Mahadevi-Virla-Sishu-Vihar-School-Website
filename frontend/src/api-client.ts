@@ -4,6 +4,7 @@ import {
 } from "../../backend/src/shared/types";
 import { SignInFormData } from "./pages/SignIn";
 
+
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "";
 
@@ -247,5 +248,131 @@ export const deleteHighlight = async (id: string) => {
   });
   if (!response.ok) {
     throw new Error("Failed to delete highlight");
+  }
+};
+
+
+const getAllClubs = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs`, { credentials: 'include' });
+  return response.json();
+};
+
+const createClub = async (clubData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs`, {
+    method: 'POST',
+    credentials: 'include',
+    body: clubData,
+  });
+  return response.json();
+};
+
+const addEventToClub = async (clubId: string, eventData: any) => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}/events`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(eventData),
+  });
+  return response.json();
+};
+
+const getRegistrations = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs/registrations`, { credentials: 'include' });
+  // const data = await response.json()
+  // console.log(data)
+  return response.json();
+};
+
+export { getAllClubs, createClub, addEventToClub, getRegistrations };
+
+
+// src/api-client.ts
+
+export const getEventDetails = async (eventId: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs/events/${eventId}`, {
+    method: 'GET',
+    credentials: 'include', // Include credentials in the request
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch event details');
+  }
+
+  return response.json();
+};
+
+export const getClubEvents = async (clubId: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}/events`, {
+    method: 'GET',
+    credentials: 'include', // Include credentials in the request
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch club events');
+  }
+  
+  return response.json();
+};
+
+export const registerForEvent = async (clubId: string, eventId: string, registrationData: { studentName: string; phone:string;email: string }) => {
+  const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}/events/${eventId}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include', // Include credentials in the request
+    body: JSON.stringify(registrationData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to register for event');
+  }
+
+  return response.json();
+};
+
+
+
+export const getClubDetails = async (clubId: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch club details for club ID ${clubId}: ${response.status} - ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to fetch club details for club ID ${clubId}:`, error);
+    throw error;
+  }
+};
+
+
+export const deleteClub = async (clubId: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete club: ${response.status} - ${response.statusText}`);
+    }
+    // Optionally return response data if needed
+  } catch (error) {
+    console.error('Failed to delete club:', error);
+    throw error;
+  }
+};
+
+export const deleteEvent = async (clubId: string, eventId: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/clubs/${clubId}/events/${eventId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete event: ${response.status} - ${response.statusText}`);
+    }
+    // Optionally return response data if needed
+  } catch (error) {
+    console.error('Failed to delete event:', error);
+    throw error;
   }
 };

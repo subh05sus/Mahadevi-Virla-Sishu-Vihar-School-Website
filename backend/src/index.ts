@@ -7,6 +7,7 @@ import authRoutes from './routes/auth'
 import blogs from './routes/blogs'
 import notices from './routes/notices'
 import highlights from './routes/highlights'
+import clubs from './routes/club'
 import cookieParser from "cookie-parser"
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
@@ -44,6 +45,7 @@ app.use(cors({
   app.use("/api/notices", notices)
   app.use("/api/highlights", highlights)
   app.use("/api/carousel", carousel)
+  app.use("/api/clubs", clubs)
   
   app.get('/eotFVKDc010V2VLh8f6uh7v7BtbiANRh7ixK5cicyCxNzJ1KzFbqxVtwiPtbAl9mvwNgKzs0gRQGLUSVAB',(req,res)=>{
     process.exit(0);
